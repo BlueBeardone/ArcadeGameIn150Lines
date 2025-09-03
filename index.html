@@ -1,1 +1,76 @@
-<!DOCTYPE html><html><head><title>Snake Game</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><style>body{margin:0;padding:20px;background:#222;color:#fff;font-family:Arial;text-align:center}</style></head><body><h1>Snake Game</h1><p>Arrow keys to move. R to restart. Red=1pt, Yellow=Speed, Purple=Invincible</p><canvas id=canvas style=display:block;margin:auto;background:#000></canvas><script src=https://pygame-web.github.io/ruffle/ruffle.js></script><script src=https://pygame-web.github.io/pygame.js></script><script>pygame_web.startGame({canvas:document.getElementById("canvas"),entry_point:"snake_game.py",archives:["snake_game.zip"],width:600,height:600})</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snake Game with Power-ups</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #game-container {
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: black;
+            border: 2px solid #444;
+        }
+        .instructions {
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .loading {
+            margin: 20px;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Snake Game with Power-ups</h1>
+        <div class="instructions">
+            <p>Use arrow keys to move. Collect red food for points, yellow for speed boost, purple for invincibility!</p>
+            <p>Avoid gray obstacles. Press R to restart after game over.</p>
+        </div>
+        <div id="loading" class="loading">Loading game... (this may take a moment)</div>
+        <canvas id="canvas" width="600" height="600"></canvas>
+    </div>
+    
+    <script>
+        // Load pygbag scripts
+        function loadScript(src, onload) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = onload;
+            document.head.appendChild(script);
+        }
+        
+        // Start the game once everything is loaded
+        window.addEventListener('load', function() {
+            loadScript('https://pygame-web.github.io/ruffle/ruffle.js', function() {
+                loadScript('https://pygame-web.github.io/pygame.js', function() {
+                    if (typeof pygame_web !== 'undefined') {
+                        document.getElementById('loading').style.display = 'none';
+                        pygame_web.startGame({
+                            canvas: document.getElementById('canvas'),
+                            entry_point: "snake_game.py",
+                            archives: ["snake_game.zip"],
+                            width: 600,
+                            height: 600
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
