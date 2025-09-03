@@ -1,0 +1,5 @@
+services:
+- type:web
+  name:snake-game
+  buildCommand:chmod +x build.sh&&./build.sh
+  staticPublishPath:./build/web
