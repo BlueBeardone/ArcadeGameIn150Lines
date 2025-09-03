@@ -35,6 +35,16 @@
         .error {
             color: #ff4444;
             margin: 20px;
+            display: none;
+        }
+        .retry-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -46,21 +56,26 @@
             <p>Avoid gray obstacles. Press R to restart after game over.</p>
         </div>
         <div id="loading" class="loading">Loading game... (this may take a moment)</div>
-        <div id="error" class="error" style="display: none;"></div>
+        <div id="error" class="error">
+            <p>Error loading game. Please try refreshing the page.</p>
+            <button class="retry-button" onclick="window.location.reload()">Retry</button>
+        </div>
         <canvas id="canvas" width="600" height="600"></canvas>
     </div>
     
-    <!-- Load local copy of pygbag.js -->
-    <script src="pygbag.js"></script>
+    <!-- Load pygbag.js with fallback -->
+    <script src="pygbag.js" onerror="showError()"></script>
     <script>
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            console.error('Failed to load pygbag.js');
+        }
+        
         window.addEventListener('load', function() {
             // Check if pygame_web is available
             if (typeof pygame_web === 'undefined') {
-                document.getElementById('error').textContent = 
-                    'Error: pygbag.js not loaded properly. Please check the console for details.';
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('loading').style.display = 'none';
-                console.error('pygame_web is not defined. pygbag.js may not be loaded.');
+                showError();
                 return;
             }
             
@@ -74,9 +89,7 @@
                     height: 600
                 });
             } catch (e) {
-                document.getElementById('error').textContent = 
-                    'Error starting game: ' + e.message;
-                document.getElementById('error').style.display = 'block';
+                showError();
                 console.error('Game start error:', e);
             }
         });
