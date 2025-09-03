@@ -45,30 +45,17 @@
         <canvas id="canvas" width="600" height="600"></canvas>
     </div>
     
+    <!-- Load pygbag directly without external dependencies -->
+    <script src="pygbag.js"></script>
     <script>
-        // Load pygbag scripts
-        function loadScript(src, onload) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.onload = onload;
-            document.head.appendChild(script);
-        }
-        
-        // Start the game once everything is loaded
         window.addEventListener('load', function() {
-            loadScript('https://pygame-web.github.io/ruffle/ruffle.js', function() {
-                loadScript('https://pygame-web.github.io/pygame.js', function() {
-                    if (typeof pygame_web !== 'undefined') {
-                        document.getElementById('loading').style.display = 'none';
-                        pygame_web.startGame({
-                            canvas: document.getElementById('canvas'),
-                            entry_point: "snake_game.py",
-                            archives: ["snake_game.zip"],
-                            width: 600,
-                            height: 600
-                        });
-                    }
-                });
+            document.getElementById('loading').style.display = 'none';
+            pygame_web.startGame({
+                canvas: document.getElementById('canvas'),
+                entry_point: "snake_game.py",
+                archives: ["snake_game.zip"],
+                width: 600,
+                height: 600
             });
         });
     </script>
