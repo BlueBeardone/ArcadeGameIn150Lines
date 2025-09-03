@@ -1,5 +1,10 @@
 services:
-- type:web
-  name:snake-game
-  buildCommand:chmod +x build.sh&&./build.sh
-  staticPublishPath:./build/web
+  - type: web
+    name: snake-game
+    env: static
+    buildCommand: chmod +x build.sh && ./build.sh
+    staticPublishPath: ./build/web
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
