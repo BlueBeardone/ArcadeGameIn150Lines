@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snake Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin: 0; padding: 0; background: black;">
+    <canvas id="canvas" style="display: block; margin: auto; background: black;"></canvas>
+    <script type="text/javascript" src="https://pygame-web.github.io/ruffle/ruffle.js"></script>
+    <script type="text/javascript" src="https://pygame-web.github.io/pygame.js"></script>
+    <script type="text/javascript">
+        pygame_web.startGame({
+            title: "Snake Game",
+            version: "0.1.0",
+            author: "Your Name",
+            canvas: document.getElementById("canvas"),
+            entry_point: "main.py",
+            archives: ["snake_game.zip"],
+            width: 600,
+            height: 600,
+        });
+    </script>
+</body>
+</html>

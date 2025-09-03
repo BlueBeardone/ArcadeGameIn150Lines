@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pygbag]
+git = "https://github.com/pygame-web/python-wasm"
+branch = "main"
+appname = "snake_game"
+pyversion = "3.11"
+build = "build"
+cdn = ""
+title = "Snake Game"
+version = "0.1.0"
+homepage = "index.html"
+author = "Your Name"
+author_email = "your.email@example.com"
+description = "Classic Snake Game"
+canonical = "https://your-render-url.onrender.com"
